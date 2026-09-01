@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HireWire — Development Roadmap</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --card: #171a21;
+    --border: #2a2e38;
+    --text: #e8e9ed;
+    --muted: #9aa1ae;
+    --accent: #5eead4;
+    --accent-dim: #1f3d38;
+    --done: #4ade80;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .wrap {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 48px 24px 96px;
+  }
+  header {
+    margin-bottom: 40px;
+  }
+  h1 {
+    font-size: 2rem;
+    margin: 0 0 8px;
+    letter-spacing: -0.02em;
+  }
+  .subtitle {
+    color: var(--muted);
+    font-size: 1rem;
+    margin: 0;
+  }
+  .meta-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin: 24px 0 40px;
+  }
+  .meta-card h2 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin: 0 0 14px;
+  }
+  .meta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 24px;
+  }
+  .meta-item { font-size: 0.92rem; }
+  .meta-item strong {
+    display: block;
+    color: var(--muted);
+    font-weight: 500;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 2px;
+  }
+  .progress-bar-outer {
+    background: var(--accent-dim);
+    border-radius: 999px;
+    height: 8px;
+    overflow: hidden;
+    margin: 8px 0 4px;
+  }
+  .progress-bar-inner {
+    background: var(--accent);
+    height: 100%;
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+  #progress-label {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  .phase {
+    margin-bottom: 36px;
+  }
+  .phase-header {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+  .phase-num {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+  }
+  .phase h2 {
+    font-size: 1.25rem;
+    margin: 0;
+  }
+  .phase-desc {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin: 4px 0 16px;
+  }
+  ul.milestones {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  ul.milestones li {
+    border-bottom: 1px solid var(--border);
+  }
+  ul.milestones li:last-child { border-bottom: none; }
+  .milestone {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 13px 16px;
+    background: var(--card);
+    cursor: pointer;
+  }
+  .milestone:hover { background: #1c2029; }
+  .milestone input[type="checkbox"] {
+    margin-top: 3px;
+    width: 17px;
+    height: 17px;
+    accent-color: var(--accent);
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+  .milestone label {
+    cursor: pointer;
+    font-size: 0.95rem;
+  }
+  .milestone .code {
+    color: var(--muted);
+    font-size: 0.78rem;
+    margin-right: 6px;
+  }
+  .milestone.checked label {
+    color: var(--muted);
+    text-decoration: line-through;
+    text-decoration-color: var(--border);
+  }
+  .note {
+    background: var(--accent-dim);
+    border-left: 3px solid var(--accent);
+    padding: 10px 14px;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.85rem;
+    color: var(--text);
+    margin-top: 10px;
+  }
+  footer {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+  button#reset-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.78rem;
+    cursor: pointer;
+  }
+  button#reset-btn:hover { border-color: var(--muted); color: var(--text); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>🪁 HireWire</h1>
+    <p class="subtitle">Development roadmap — a daily job-listing email digest bot with a web dashboard</p>
+  </header>
+
+  <div class="meta-card">
+    <h2>Project decisions so far</h2>
+    <div class="meta-grid">
+      <div class="meta-item"><strong>Jobs API</strong>Adzuna</div>
+      <div class="meta-item"><strong>Database</strong>MySQL on Railway</div>
+      <div class="meta-item"><strong>Backend</strong>Node.js + Express (built from scratch)</div>
+      <div class="meta-item"><strong>Email API</strong>TBD in Phase 4</div>
+      <div class="meta-item"><strong>Scheduling</strong>TBD in Phase 5 (GitHub Actions vs. Railway cron)</div>
+      <div class="meta-item"><strong>Dashboard hosting</strong>TBD in Phase 7</div>
+    </div>
+    <div style="margin-top:18px;">
+      <div class="progress-bar-outer"><div class="progress-bar-inner" id="progress-bar"></div></div>
+      <div id="progress-label">0 of 0 milestones complete</div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-header">
+      <span class="phase-num">PHASE 0</span>
+      <h2>Setup</h2>
+    </div>
+    <p class="phase-desc">Housekeeping — get the project properly scaffolded and version-controlled before writing anything meaningful.</p>
+    <ul class="milestones">
+      <li class="milestone"><input type="checkbox" id="m0-1"><label for="m0-1"><span class="code">0.1</span>Create the HireWire GitHub repo (empty — no README/.gitignore/license at creation) and clone it as a sibling to TaskFlow_git and Odin_Workspace</label></li>
+      <li class="milestone"><input type="checkbox" id="m0-2"><label for="m0-2"><span class="code">0.2</span>Initialize it as a Node.js project. Understand what the file this creates actually stores.</label></li>
+      <li class="milestone"><input type="checkbox" id="m0-3"><label for="m0-3"><span class="code">0.3</span>Write a one-paragraph README describing what the project does, before writing any real code</label></li>
+    </ul>
+  </div>
+
+  <div class="phase">
+    <div class="phase-header">
+      <span class="phase-num">PHASE 1</span>
+      <h2>Being a client — talk to the Jobs API by hand</h2>
+    </div>
+    <p class="phase-desc">No code yet. Understand the API on its own terms before writing a single line that touches it.</p>
+    <ul class="milestones">
+      <li class="milestone"><input type="checkbox" id="m1-1"><label for="m1-1"><span class="code">1.1</span>Sign up for an Adzuna developer account, get an App ID and App Key</label></li>
+      <li class="milestone"><input type="checkbox" id="m1-2"><label for="m1-2"><span class="code">1.2</span>Make one manual request — paste a search URL into a browser (or use curl/Postman) — and read the raw JSON response. Note the fields each listing has, and anything that looks useful for de-duplication later.</label></li>
+    </ul>
+  </div>
+
+  <div class="phase">
+    <div class="phase-header">
+      <span class="phase-num">PHASE 2</span>
+      <h2>Your first real client code</h2>
+    </div>
+    <p class="phase-desc">Move the manual request into an actual script.</p>
+    <ul class="milestones">
+      <li class="milestone"><input type="checkbox" id="m2-1"><label for="m2-1"><span class="code">2.1</span>Write a standalone script (runs once, no listening) that makes the same API request from Node and prints the raw response</label></li>
+      <li class="milestone"><input type="checkbox" id="m2-2"><label for="m2-2"><span class="code">2.2</span>Parse the response and print just the useful fields (title, company, link) per listing</label></li>
+      <li class="milestone"><input type="checkbox" id="m2-3"><label for="m2-3"><span class="code">2.3</span>Add keyword filtering — only print listings matching target criteria</label></li>
+    </ul>
+    <div class="note">End of Phase 2: running the script shows today's relevant listings in your terminal. No email, no memory, no automation yet.</div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-header">
+      <span class="phase-num">PHASE 3</span>
+      <h2>Giving it memory — the database</h2>
+    </div>
+    <p class="phase-desc">Without persistence, you'd see the same jobs every single day forever.</p>
+    <ul class="milestones">
+      <li class="milestone"><input type="checkbox" id="m3-1"><label for="m3-1"><span class="code">3.1</span>Design the table structure on paper — what columns does a "job listing" need to remember?</label></li>
+      <li class="milestone"><input type="checkbox" id="m3-2"><label for="m3-2"><span class="code">3.2</span>Connect the script to Railway MySQL, write one row, read it back — small deliberate connection test</label></li>
+      <li class="milestone"><input type="checkbox" id="m3-3"><label for="m3-3"><span class="code">3.3</span>Build dedup logic — before saving/printing a listing, check whether it's already in the database</label></li>
+    </ul>
+  </div>
+
+  <div class="phase">
+    <div class="phase-header">
+      <span class="phase-num">PHASE 4</span>
+      <h2>Becoming a client again — the email API</h2>
+    </div>
+    <p class="phase-desc">Same client pattern as Phase 1, different destination.</p>
+    <ul class="milestones">
+      <li class="milestone"><input type="checkbox" id="m4-1"><label for="m4-1"><span class="code">4.1</span>Research and pick an email-sending API (e.g. Resend, SendGrid) — read the docs the same way as Adzuna's</label></li>
+      <li class="milestone"><input type="checkbox" id="m4-2"><label for="m4-2"><span class="code">4.2</span>Send one manual test email through their dashboard/API playground before writing any code</label></li>
+      <li class="milestone"><input type="checkbox" id="m4-3"><label for="m4-3"><span class="code">4.3</span>Write the code that sends an email from the script, formatted with the new listings</label></li>
+    </ul>
+    <div class="note">End of Phase 4: running the script by hand produces a real email. This is already a complete, working product — everything after this removes the need to run it by hand, and adds a second way to view the data.</div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-header">
+      <span class="phase-num">PHASE 5</span>
+      <h2>Scheduling — making it run without you</h2>
+    </div>
+    <ul class="milestones">
+      <li class="milestone"><input type="checkbox" id="m5-1"><label for="m5-1"><span class="code">5.1</span>Learn what a scheduled job / cron actually is. Research GitHub Actions scheduled workflows vs. Railway cron.</label></li>
+      <li class="milestone"><input type="checkbox" id="m5-2"><label for="m5-2"><span class="code">5.2</span>Get the script running automatically once a day, unattended, successfully</label></li>
+    </ul>
+  </div>
+
+  <div class="phase">
+    <div class="phase-header">
+      <span class="phase-num">PHASE 6</span>
+      <h2>The dashboard — being on the server side of HTTP</h2>
+    </div>
+    <ul class="milestones">
+      <li class="milestone"><input type="checkbox" id="m6-1"><label for="m6-1"><span class="code">6.1</span>Build the smallest possible Express server — one endpoint returning hardcoded text</label></li>
+      <li class="milestone"><input type="checkbox" id="m6-2"><label for="m6-2"><span class="code">6.2</span>Make that endpoint query the database and return real listing data as JSON</label></li>
+      <li class="milestone"><input type="checkbox" id="m6-3"><label for="m6-3"><span class="code">6.3</span>Build a simple HTML/CSS/JS frontend that calls the endpoint and displays listings</label></li>
+      <li class="milestone"><input type="checkbox" id="m6-4"><label for="m6-4"><span class="code">6.4</span>Add a way to update filter keywords through the dashboard (form → POST → saved to DB), and confirm Phase 3's logic actually respects the saved preference</label></li>
+    </ul>
+  </div>
+
+  <div class="phase">
+    <div class="phase-header">
+      <span class="phase-num">PHASE 7</span>
+      <h2>Deployment</h2>
+    </div>
+    <ul class="milestones">
+      <li class="milestone"><input type="checkbox" id="m7-1"><label for="m7-1"><span class="code">7.1</span>Host the dashboard somewhere real (Railway / Render)</label></li>
+      <li class="milestone"><input type="checkbox" id="m7-2"><label for="m7-2"><span class="code">7.2</span>Confirm the scheduled script and the hosted dashboard are both live, talking through the shared database</label></li>
+    </ul>
+  </div>
+
+  <footer>
+    <p>Progress is saved locally in this browser (via <code>localStorage</code>) — it won't sync across devices or show up for anyone else viewing this file on GitHub. Re-check items after cloning fresh on a new machine.</p>
+    <button id="reset-btn">Reset all progress</button>
+  </footer>
+
+</div>
+
+<script>
+  const STORAGE_KEY = "hirewire-roadmap-progress";
+  const checkboxes = Array.from(document.querySelectorAll('.milestone input[type="checkbox"]'));
+
+  function loadState() {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+    } catch (e) {
+      return {};
+    }
+  }
+
+  function saveState(state) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch (e) {
+      console.error("Could not save progress:", e);
+    }
+  }
+
+  function updateProgressBar() {
+    const total = checkboxes.length;
+    const done = checkboxes.filter(cb => cb.checked).length;
+    const pct = total === 0 ? 0 : Math.round((done / total) * 100);
+    document.getElementById('progress-bar').style.width = pct + '%';
+    document.getElementById('progress-label').textContent = `${done} of ${total} milestones complete (${pct}%)`;
+  }
+
+  function applyCheckedClass(cb) {
+    const li = cb.closest('.milestone');
+    if (cb.checked) {
+      li.classList.add('checked');
+    } else {
+      li.classList.remove('checked');
+    }
+  }
+
+  const state = loadState();
+  checkboxes.forEach(cb => {
+    if (state[cb.id]) {
+      cb.checked = true;
+      applyCheckedClass(cb);
+    }
+    cb.addEventListener('change', () => {
+      const currentState = loadState();
+      currentState[cb.id] = cb.checked;
+      saveState(currentState);
+      applyCheckedClass(cb);
+      updateProgressBar();
+    });
+  });
+
+  document.getElementById('reset-btn').addEventListener('click', () => {
+    if (confirm("Reset all checked milestones? This can't be undone.")) {
+      localStorage.removeItem(STORAGE_KEY);
+      checkboxes.forEach(cb => {
+        cb.checked = false;
+        applyCheckedClass(cb);
+      });
+      updateProgressBar();
+    }
+  });
+
+  updateProgressBar();
+</script>
+
+</body>
+</html>
