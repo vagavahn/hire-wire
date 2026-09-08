@@ -1,0 +1,24 @@
+{
+  "name": "hire-wire",
+  "version": "1.0.0",
+  "description": "This is a web based application that periodically pings an API called \"Adzuna\" to check for new job listings. Then parses the results, checks for duplicates, and then sends push request to a another API that sends the job listings via an email to the user. This application will also update a dashboard with the number of job listings that have been sent, completed, and not applied to.",
+  "main": "node_practice.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vagavahn/hire-wire.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/vagavahn/hire-wire/issues"
+  },
+  "homepage": "https://github.com/vagavahn/hire-wire#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
