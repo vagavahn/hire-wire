@@ -1,26 +1,10 @@
-import express from 'express';
-const app = express();
+import fs from 'fs';
 
-//app.get('/about', (req, res) =>{
-//    res.send('hello user, this is route parameter test');
- //   console.log('route parameter test successful!!');
-//});
-
-
-for(var i = 2; i < process.argv.length; i++){
-    var str = String(process.argv[2]);
-
-    if(str[1] == '+'){
-        console.log(Number(str[0]) + Number(str[2]));
-    }else if(str[1] == '-'){
-        console.log(Number(str[0]) - Number(str[2]));
-    }else if(str[1] == '*'){
-        console.log(Number(str[0]) * Number(str[2]));
-    }else if(str[1] == '/'){
-        console.log(Number(str[0]) / Number(str[2]));
+fs.readFile('newfile.txt', 'utf8', (err, data) =>{
+    if (err) {   
+        console.error('Error reading file:', err);
+        return;
     }
-}
 
-
-
-//app.listen(3000);
+    console.log('File content:', data);
+})
