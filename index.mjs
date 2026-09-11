@@ -6,13 +6,16 @@ const app = express();
  //   console.log('route parameter test successful!!');
 //});
 
-var name = "";
+var calc = 0;
 
 for(var i = 2; i < process.argv.length; i++){
-    name = String(process.argv[i]);
+    var str = String(process.argv[2]);
+
+    if(str[1] == '+'){
+        console.log(Number(str[0]) + Number(str[2]));
+    }
 }
 
-console.log("Hello my name is : " + name + "!");
 
 
 //app.listen(3000);
